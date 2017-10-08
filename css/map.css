@@ -1,5 +1,5 @@
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Josefin+Slab|Arvo|Lato|Vollkorn|Abril+Fatface|Old+Standard+TT|Droid+Sans|Lobster|Inconsolata|Montserrat|Playfair+Display|Karla|Alegreya|Libre+Baskerville|Merriweather|Lora|Archivo+Narrow|Neuton|Signika|Questrial|Fjalla+One|Bitter|Varela+Round);
+@import url(https://fonts.googleapis.com/css?family=Alegreya:200,300,400,500,600,700,700i,900);
 
 .background {
   fill: transparent;
@@ -8,11 +8,17 @@
 
 .map-layer {
   fill: #fff;
-  stroke: #aaa;
+  stroke: #000;
+  stroke-width: 0.7;
+  stroke-opacity: 0.5;
 }
 
 .effect-layer{
   pointer-events:none;
+}
+
+body{
+  font-family: 'Alegreya', serif;
 }
 
 text{
@@ -32,30 +38,32 @@ text.big-text{
 
 /* Css Adicional */
 
-body{
-  background-color:#607d8b;
-}
 
 .gral-container{
-  min-width: 1200px;
-}
-
-.map-info-row{
-  padding-top:3em;
+ /*min-width: 1200px;*/
 }
 
 .map-container{
-  
+  padding-top: 1em;
+}
+
+.map-info-row{
+  padding-top:0.5em;
 }
 
 #dep-name{
-  color:#fff;
-  letter-spacing: 3px;
-  margin-top: 3em;
+  color:rgba(0, 0, 0, 0.6);
+  letter-spacing: 2px;
+  margin-top: 2em;
+  padding-left: 2em;
+  font-size: 30px;
 }
 
 #vis-title{
-  color:rgb(235, 247, 246);
+  color:rgba(0, 0, 0, 0.7);
+  font-weight: 400;
+  margin-top: 0.8em;
+  margin-bottom: 0em;
 }
 
 #tab-menu{
@@ -63,9 +71,28 @@ body{
 }
 
 #tab-menu .nav-link{
-  color:white;
+  font-size: 20px;
+  color:black;
 }
 
 #tab-menu .nav-link.active{
+  background-color:#efefef;
   color:black;
+}
+
+
+.table tr td{
+  border: none;
+  font-size: 20px;
+  color:rgba(0, 0, 0, 0.6);
+}
+
+.table tr th{
+  border: none;
+}
+
+.table th[scope="row"]{
+  font-size: 20px;
+  font-weight: 200;
+  text-align: right;
 }

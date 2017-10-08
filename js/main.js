@@ -1,97 +1,127 @@
 $(function(){
 
-	var visTitle = "Producto: Café";
+	var visTitle = "Producto: Cacao";
 	$("#vis-title").text(visTitle);
 
-	var map_width = 600,
-	map_height = 750,
-	centered;
+	var map_width = $("#map").parent().width(),
+		map_height = 800,
+		centered;
+
+	var sch = [
+				['#FF6B6B', '#FFBABA', '#FF8F8F', '#FF4C4C', '#E92525'],
+				['#FFC0C0', '#FFE6E6', '#FFD3D3', '#FFADAD', '#FF9A9A'],
+				['#FFCBCB', '#FF9C9C', '#FF3939', '#FF8383', '#FF0909'],
+				[
+					'#FFCBCB',
+					'#FF8787',
+					'#FFA2A2',
+					'#FF5555',
+					'#FF0808'
+				],
+				[
+					'#F3F8FE',
+					'#61A1F3',
+					'#9DC4F6',
+					'#2A82F2',
+					'#036BF0'
+				],
+				[
+					'#EAF3FF',
+					'#AACFFF',
+					'#71AFFF',
+					'#308AFF',
+					'#005FD9'
+				]
+			  ];
+
+
+   
+
 
 	  // Define color scale
-	var color = d3.scale.linear()
-	  					.clamp(true)
-	  					.range(['#fff', '#26a69a']);
+	var color = d3.scaleQuantile()	
 
-	var projection = d3.geo.mercator()
-	  					   .scale(2500)
-	  					   .center([-74, 4.5])
-	  					   .translate([map_width / 2, map_height / 2]);
+	  			  .range(sch[5]);
 
-	  var path = d3.geo.path()
-	  .projection(projection);
+	var projection = d3.geoMercator()
+  					   .scale(2500)
+  					   .center([-74, 4.5])
+  					   .translate([map_width / 2, map_height / 2]);
+
+  	var path = d3.geoPath()
+				 .projection(projection);
 
 	  // Set svg width & height
-	  var svg = d3.select('#map')
-	  .attr('width', map_width)
-	  .attr('height', map_height);
+  	var svg = d3.select('#map')
+	  			.attr('width', map_width)
+	  			.attr('height', map_height);
 
 	  // Add background
-	  svg.append('rect')
-	  .attr('class', 'background')
-	  .attr('width', map_width)
-	  .attr('height', map_height)
-	  .on('click', clicked);
+	svg.append('rect')
+	   .attr('class', 'background')
+	   .attr('width', map_width)
+	   .attr('height', map_height)
+	   .on('click', clicked);
 
-	  var map_g = svg.append('g');
+  	var map_g = svg.append('g');
 
-	  var effectLayer = map_g.append('g')
-	  .classed('effect-layer', true);
+	var effectLayer = map_g.append('g')
+						   .classed('effect-layer', true);
 
-	  var mapLayer = map_g.append('g')
-	  .classed('map-layer', true);
+	var mapLayer = map_g.append('g')
+	  					.classed('map-layer', true);
 
-	  var dummyText = map_g.append('text')
-	  .classed('dummy-text', true)
-	  .attr('x', 10)
-	  .attr('y', 30)
-	  .style('opacity', 0);
+	var dummyText = map_g.append('text')
+	  					 .classed('dummy-text', true)
+	  					 .attr('x', 10)
+	  					 .attr('y', 30)
+	  					 .style('opacity', 0);
 
 	var bigText = map_g.append('text')
-	  .classed('big-text', true)
-	  .attr('x', 20)
-	  .attr('y', 45);
+					   .classed('big-text', true)
+	  				   .attr('x', 20)
+	  				   .attr('y', 45);
 
 	var depName = $("#dep-name");
 
-	// Load map data
-	d3.json('Colombia.geo.json', function(error, mapData) {
-	  	var features = mapData.features;
-
-	    // Update color scale domain based on data
-	    color.domain([0, d3.max(features, nameLength)]);
-
-	    // Draw each province as a path
-	    mapLayer.selectAll('path')
-			    .data(features)
-			    .enter().append('path')
-			    .attr('d', path)
-			    .attr('vector-effect', 'non-scaling-stroke')
-			    .style('fill', fillFn)
-			    .on('mouseover', mouseover)
-			    .on('mouseout', mouseout)
-			    .on('click', clicked);
-	});
-
+	
 	  // Get province name
-	  function nameFn(d){
+	function nameFn(d){
 	  	return d && d.properties ? d.properties.NOMBRE_DPT : null;
-	  }
+  	}
 
-	  // Get province name length
-	  function nameLength(d){
+	// Get province name length
+	function nameLength(d){
 	  	var n = nameFn(d);
 	  	return n ? n.length : 0;
-	  }
+	}
 
-	  // Get province color
-	  function fillFn(d){
-	  	return color(nameLength(d));
-	  }
+	// Get province color
+	function fillFn(d){
+		if(d && d.properties){
+			var nombres = data.map(function(d){ return d.key });			
+			var idx = nombres.indexOf(d.properties.NOMBRE_DPT);
+			if(idx == -1) return color.range()[0];
+	  		return color(data[idx].value.unidades);
+		}
+	}
 
-	  // When clicked, zoom in
-	  function clicked(d) {
+	function updateDeptInfo(d){
+		var dp = data.filter(function(g){ return g.key == d.properties.NOMBRE_DPT; });
+		$("#info-area").text(d.properties.AREA);
+		$("#info-toneladas").text(dp[0].value.toneladas);
+		$("#info-pesos").text(dp[0].value.valormilespesos);
+		updateChart(d.properties.NOMBRE_DPT);
+	}
+
+	// When clicked, zoom in
+	function clicked(d) {
+		$(".table").removeClass("invisible");
 	  	var x, y, k;
-
+	  	if(d && d.properties){
+    		updateDeptInfo(d);
+    		depName.text(d.properties.NOMBRE_DPT);
+	  	}
 	    // Compute centroid of the selected path
 	    if (d && centered !== d) {
 	    	var centroid = path.centroid(d);
@@ -106,28 +136,42 @@ $(function(){
 	    	centered = null;
 	    }
 
+
+
 	    // Highlight the clicked province
 	    mapLayer.selectAll('path')
-	    		.style('fill', function(d){return centered && d===centered ? '#D5708B' : fillFn(d);});
+	    		.style('fill', function(d){return centered && d===centered ? '#00bfa5' : fillFn(d);});
 
 	    // Zoom
 	    map_g.transition()
-	    .duration(750)
-	    .attr('transform', 'translate(' + map_width / 2 + ',' + map_height / 2 + ')scale(' + k + ')translate(' + -x + ',' + -y + ')');
+	    	 .duration(750)
+	    	 .attr('transform', 'translate(' + map_width / 2 + ',' + map_height / 2 + ')scale(' + k + ')translate(' + -x + ',' + -y + ')');
 	}
 
 	function mouseover(d){
-	    // Highlight hovered province
-	    d3.select(this).style('fill', '#00bfa5');
 
-	    // Draw effects
-	    depName.text(text);
+		svg.selectAll("path").sort(function (a, b) { 			// select the parent and sort the path's							      
+							      if (a.properties.DPTO != d.properties.DPTO) return -1;  // a is not the hovered element, send "a" to the back
+							      else return 1;                // a is the hovered element, bring "a" to the front
+							  });
+
+	    d3.select(this).transition().duration(150)
+	    			   .style("stroke","#003882")
+	    			   .style('stroke-width', '3')
+	    			   .style('stroke-opacity', '0.8');
+
+	    //depName.text(d.properties.NOMBRE_DPT);
 	}
 
 	function mouseout(d){
 	    // Reset province color
+
+	    d3.select(this).transition().duration(150)
+	    			   .style("stroke","#000")
+	    			   .style('stroke-width', '0.7')
+	    			   .style('stroke-opacity', '0.5');
 	    mapLayer.selectAll('path')
-	    .style('fill', function(d){return centered && d===centered ? '#D5708B' : fillFn(d);});
+	    		.style('fill', function(d){return centered && d===centered ? '#00bfa5' : fillFn(d);});
 	}
 
 	$('#tab-menu a').click(function (e) {
@@ -142,7 +186,7 @@ $(function(){
 	$("#bar_svg").attr("width", $("#bar_svg").parent().width());
 
 	var bar_svg = d3.select("#bar_svg"),
-		margin = { top:20, right: 20, bottom: 30, left: 200 },
+		margin = { top:20, right: 20, bottom: 30, left: 80 },
 		width = +bar_svg.attr("width") - margin.left - margin.right,
 		height = +bar_svg.attr("height") - margin.top - margin.bottom,
 		g = bar_svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -160,8 +204,8 @@ $(function(){
 		years.push(i);
 
 	var xAxis = g.append("g")
-		 			 .attr("class", "axis axis--x")
-		 			 .attr("transform", "translate(0,"+height+")");
+	 			 .attr("class", "axis axis--x")
+	 			 .attr("transform", "translate(0,"+height+")");
 
 	var yAxis = g.append("g")
 				 .attr("class", "axis--y");
@@ -170,26 +214,27 @@ $(function(){
 
 	var dpto = "Caldas";
 
+	var data;
+
 	d3.csv("data/new/exports/cacao.csv", function(error, csv_data){
 
 		console.log(csv_data);
 
-		var data = d3.nest()
-					 .key(function(d){ return d.departamento; })				 
-					 .key(function(d){ return d.anio; }).sortKeys(d3.ascending)
-					 .key(function(d){ return d.mes; }).sortKeys(function(a, b){ return monthNames.indexOf(a) - monthNames.indexOf(b); })
-					 .rollup(function(d){
-					 						return {
-					 									"toneladas" : d3.sum(d, function(g){ return g.toneladas;}), 
-					 									"unidades" : d3.sum(d, function(g){ return g.cantidadunidades;}),
-					 									"valormilespesos" : d3.sum(d, function(g){ return g.valormilespesos;})
-					 								}
-			 							})
-					 .entries(csv_data);
-		//console.log(data)
+		data = d3.nest()
+				 .key(function(d){ return d.departamento; })				 
+				 .key(function(d){ return d.anio; }).sortKeys(d3.ascending)
+				 .key(function(d){ return d.mes; }).sortKeys(function(a, b){ return monthNames.indexOf(a) - monthNames.indexOf(b); })
+				 .rollup(function(d){
+				 						return {
+				 									"toneladas" : d3.sum(d, function(g){ return g.toneladas;}), 
+				 									"unidades" : d3.sum(d, function(g){ return g.cantidadunidades;}),
+				 									"valormilespesos" : d3.sum(d, function(g){ return g.valormilespesos;})
+				 								}
+		 							})
+				 .entries(csv_data);		
 		for(var i = 0; i < data.length; i++)
 			aggregate(data[i])
-
+		console.log(data)
 		function aggregate(node){
 		    if (node.hasOwnProperty("value"))
 		        return;
@@ -208,14 +253,55 @@ $(function(){
 		    return;
 		}
 
-		$("#change").click(function(){
-			updateChart(dpto);
-		})
+		// Load map data
+		d3.json('Colombia.geo.json', function(error, mapData) {
+		  	var features = mapData.features;
+
+		    // Update color scale domain based on data
+		    color.domain(data.map(function(d){ return d.value.unidades; }));
+
+		    // Draw each province as a path
+		    mapLayer.selectAll('path')
+				    .data(features)
+				    .enter().append('path')
+				    .attr('d', path)
+				    .attr('vector-effect', 'non-scaling-stroke')
+				    .style('fill', fillFn)
+				    .on('mouseover', mouseover)
+				    .on('mouseout', mouseout)
+				    .on('click', clicked);
+
+		});
 
 	});
 
+	var yLabel = g.append("text")
+		      	  .attr("transform", "rotate(-90)")
+		      	  .attr("y", -78)
+		      	  .attr("x", 20)
+		      	  .attr("font-size", "12px")
+		      	  .attr("dy", "0.71em")
+		      	  .attr("fill", "#000")
+		      	  .text("Cantidad exportada, KG");
+
+	var clickLabel = g.append("text")
+			      	  .attr("y", -100)
+			      	  .attr("x", 100)
+			      	  .attr("font-size", "13px")
+			      	  .attr("dy", "0.71em")
+			      	  .attr("fill", "#000")
+			      	  .text("Clickea una barra para ver los datos de ese año");
+
 	function updateChart(departamento){
+		console.log(departamento)
+		console.log(data.map(function(d){ return d.key }))
 		var data_dpto = data.filter(function(d){ return d.key == departamento })[0];
+
+		yLabel.transition()
+			  .attr("x", -150);
+
+		clickLabel.transition()
+				  .attr("y", 0);
 
 		x.domain(years);
 
@@ -263,6 +349,12 @@ $(function(){
 
 	function makeChartByMonth(data_year){
 		
+		yLabel.transition()
+			  .attr("x", -150)
+
+		clickLabel.transition()
+				  .attr("y", -100);
+
 		x.domain(monthNames);
 
 		y.domain([
