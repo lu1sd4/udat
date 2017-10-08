@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Datos U</title>
+  <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/map.css">
+</head>
+
+<body>
+
+  <div class="container gral-container">
+    <div class="row map-info-row">
+
+        <div class="col-7 map-container">
+          <h2 id="vis-title"></h2>  
+          <svg></svg>
+        </div>
+
+        <div class="col map-info">
+              <h4 id="dep-name">Selecciona un departamento</h4>
+              <div class="card text-center">
+                <div class="card-header">
+                  Producto
+                </div>
+                <div class="card-block">
+                  <p class="card-text">3000 Kg</p>
+                </div>
+                <div class="card-footer text-muted">
+                  Promedio 10 años
+                </div>
+              </div>
+
+              <ul class="nav nav-tabs" id="tab-menu" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-expanded="true">Exportación</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-expanded="false">Importación</a>
+                </li>
+              </ul>
+
+             <div class="tab-content" id="tabContent">
+              <div role="tabpanel" class="tab-pane fade active show" id="home" aria-labelledby="home-tab" aria-expanded="true">
+                
+              </div>
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" aria-expanded="false">
+                
+              </div>
+              
+            </div>
+
+
+
+        </div>  
+      </div>
+
+      
+    </div>
+  </div>
+
+
+  <script src="libs/jquery/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+
+  <script src="libs/bootstrap/js/bootstrap.min.js"></script>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="js/maps.js"></script>
+
+</body>
