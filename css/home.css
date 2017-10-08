@@ -1,0 +1,76 @@
+/* Document styling */
+body {
+  background-color:#fff;
+	font-family: 'Alegreya', serif;
+	width: 840px;
+	margin: 0 auto 50px auto;
+	font-size: 14px;
+}
+
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 20px 52px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+  width:180px;
+  height: 80px;
+  font-size:20px !important;
+  text-align:center;
+}
+
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 20px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+.twitter-share-button {width: 82px !important;}
+
+svg {
+  width: 840px;
+  height: 500px;
+  font-family: helvetica, sans-serif;
+}
+
+path, line {
+  stroke: rgba(0, 0, 0, 0.6);
+  stroke-width: 1;
+}
+
+#chart{
+  margin-top:3em;
+}
+
+#home-title{
+  font-size:40px;
+  font-weight: 400;
+  color:rgba(0, 0, 0, 0.7);
+  text-align:center;
+  margin-top:1em;
+  margin-bottom:0px;
+}
+
+.tutorial{
+  text-align:center;
+  font-size:20px;
+  font-weight: 400;
+  color:rgba(0, 0, 0, 0.6);
+  padding-top:0px;
+  margin-top:1em;
+}

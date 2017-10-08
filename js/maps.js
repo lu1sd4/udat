@@ -4,54 +4,54 @@
   $("#vis-title").text(visTitle);
 
   var width = 600,
-      height = 750,
-      centered;
+  height = 750,
+  centered;
 
   // Define color scale
   var color = d3.scale.linear()
-    .domain([1, 20])
-    .clamp(true)
-    .range(['#fff', '#26a69a']);
+                      .domain([1, 20])
+                      .clamp(true)
+                      .range(['#fff', '#26a69a']);
 
   var projection = d3.geo.mercator()
-    .scale(2500)
-    // Center the Map in Colombia
-    .center([-74, 4.5])
-    .translate([width / 2, height / 2]);
+                         .scale(2500)
+                         // Center the Map in Colombia
+                         .center([-74, 4.5])
+                         .translate([width / 2, height / 2]);
 
-  var path = d3.geo.path()
-    .projection(projection);
+    var path = d3.geo.path()
+                     .projection(projection);
 
   // Set svg width & height
-  var svg = d3.select('svg')
-    .attr('width', width)
-    .attr('height', height);
+  var svg = d3.select('#map')
+              .attr('width', width)
+              .attr('height', height);
 
   // Add background
   svg.append('rect')
-    .attr('class', 'background')
-    .attr('width', width)
-    .attr('height', height)
-    .on('click', clicked);
+     .attr('class', 'background')
+     .attr('width', width)
+     .attr('height', height)
+     .on('click', clicked);
 
   var g = svg.append('g');
 
   var effectLayer = g.append('g')
-    .classed('effect-layer', true);
+                     .classed('effect-layer', true);
 
   var mapLayer = g.append('g')
-    .classed('map-layer', true);
+                  .classed('map-layer', true);
 
   var dummyText = g.append('text')
-    .classed('dummy-text', true)
-    .attr('x', 10)
-    .attr('y', 30)
-    .style('opacity', 0);
+  .classed('dummy-text', true)
+  .attr('x', 10)
+  .attr('y', 30)
+  .style('opacity', 0);
 
   var bigText = g.append('text')
-    .classed('big-text', true)
-    .attr('x', 20)
-    .attr('y', 45);
+  .classed('big-text', true)
+  .attr('x', 20)
+  .attr('y', 45);
 
   var depName = $("#dep-name");
 
@@ -64,31 +64,31 @@
 
     // Draw each province as a path
     mapLayer.selectAll('path')
-        .data(features)
-      .enter().append('path')
-        .attr('d', path)
-        .attr('vector-effect', 'non-scaling-stroke')
-        .style('fill', fillFn)
-        .on('mouseover', mouseover)
-        .on('mouseout', mouseout)
-        .on('click', clicked);
-  });
+    .data(features)
+    .enter().append('path')
+    .attr('d', path)
+    .attr('vector-effect', 'non-scaling-stroke')
+    .style('fill', fillFn)
+    .on('mouseover', mouseover)
+    .on('mouseout', mouseout)
+    .on('click', clicked);
+});
 
   // Get province name
   function nameFn(d){
     return d && d.properties ? d.properties.NOMBRE_DPT : null;
-  }
+}
 
   // Get province name length
   function nameLength(d){
     var n = nameFn(d);
     return n ? n.length : 0;
-  }
+}
 
   // Get province color
   function fillFn(d){
     return color(nameLength(d));
-  }
+}
 
   // When clicked, zoom in
   function clicked(d) {
@@ -101,44 +101,44 @@
       y = centroid[1];
       k = 4;
       centered = d;
-    } else {
+  } else {
       x = width / 2;
       y = height / 2;
       k = 1;
       centered = null;
-    }
+  }
 
     // Highlight the clicked province
     mapLayer.selectAll('path')
-      .style('fill', function(d){return centered && d===centered ? '#D5708B' : fillFn(d);});
+    .style('fill', function(d){return centered && d===centered ? '#D5708B' : fillFn(d);});
 
     // Zoom
     g.transition()
-      .duration(750)
-      .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')scale(' + k + ')translate(' + -x + ',' + -y + ')');
-  }
+    .duration(750)
+    .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')scale(' + k + ')translate(' + -x + ',' + -y + ')');
+}
 
-  function mouseover(d){
+function mouseover(d){
     // Highlight hovered province
     d3.select(this).style('fill', '#00bfa5');
 
     // Draw effects
     textArt(nameFn(d));
-  }
+}
 
-  function mouseout(d){
+function mouseout(d){
     // Reset province color
     mapLayer.selectAll('path')
-      .style('fill', function(d){return centered && d===centered ? '#D5708B' : fillFn(d);});
+    .style('fill', function(d){return centered && d===centered ? '#D5708B' : fillFn(d);});
 
     // Remove effect text
     effectLayer.selectAll('text').transition()
-      .style('opacity', 0)
-      .remove();
+    .style('opacity', 0)
+    .remove();
 
     // Clear province name
     bigText.text('');
-  }
+}
 
   // Gimmick
   // Just me playing around.
@@ -147,7 +147,7 @@
   var BASE_FONT = "'Helvetica Neue', Helvetica, Arial, sans-serif";
 
   var FONTS = [
-    "Open Sans",
+  "Open Sans",
   ];
 
   function textArt(text){
@@ -159,15 +159,14 @@
       .style('color', fontFamily)
       .text(text);*/
 
-    depName.text(text)
+      depName.text(text)
 
-    
+
   }
-
 
   $('#tab-menu a').click(function (e) {
     e.preventDefault()
     $(this).tab('show');
-  })
+})
 
 })();

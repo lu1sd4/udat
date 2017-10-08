@@ -4,26 +4,43 @@
 var group = [];
 var limits = [];
 var colors = [];
-var branches = [
-];
+var branches = [];
 var seed = {
   i: 0,
   x: 420,
-  y: 600,
+  y: 500,
   a: 0,
-  l: 130,
+  l: 110,
   d: 0
 }; // a = angle, l = length, d = depth
 var da = 0.5; // Angle delta
 var dl = 0.8; // Length delta (factor)
 var ar = 0.7; // Randomness
 var maxDepth = 10;
+var colors_hover = ['#009688', '#e64a19', '#5e35b1', '#1976d2', '#99ff00', '#696456'];
 
 var tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
   .html(function(d) {
-    return "<strong>Producto:</strong> <span style=''>" + d.group + "</span>";
+
+    var product = '';
+    switch(d.group){
+    case 1:
+      product = 'Café';
+      break;
+    case 2:
+      product = 'Cacao';
+      break;
+    case 3:
+      product = 'Algodón';
+      break;
+    case 4:
+      product = 'Yuca';
+      break;
+  }
+
+    return "<strong>Producto:</strong> <span style=''>" + product + "</span>";
   })
 
 d3.select("svg").call(tip);
@@ -100,17 +117,20 @@ function highlightParents(d) {
   //var colour = '#777';
   var op = 1;
   var sw = 0;
+  var color = colors_hover[0];
   if(d3.event.type === 'mouseover'){
     if(d.group > 0){
       //colour = colors[d.group - 1];
+      color = colors_hover[d.group - 1]
       op = 0.9;
-      sw = -2;
+      sw = -4;
       tip.show(d);
     }
     console.log(d);
   }
   else
   {
+    color = colors[d.group - 1]
     tip.hide();
   }
   var depth = d.d;
@@ -126,7 +146,7 @@ function highlightParents(d) {
     for(var i = limit.lowerLimit; i <= limit.upperLimit; i++){
       if(d.group > 0){
         //d3.select('#id-' + parseInt(d.i)).style('stroke', colour);
-        d3.select('#id-' + parseInt(d.i)).style('stroke-opacity', op).style('stroke-width', function (line) {
+        d3.select('#id-' + parseInt(d.i)).style('stroke', color).style('stroke-opacity', op).style('stroke-width', function (line) {
           return parseInt(maxDepth + 1 - (d.d + sw)) + 'px';
         });
 
@@ -137,7 +157,17 @@ function highlightParents(d) {
 }
 
 function showProduct(d){
-  console.log(d);
+  switch(d.group){
+    case 1:
+      location.href = 'map_cafe.html';
+      break;
+    case 2:
+      break;
+    case 3:
+      break;
+    case 4:
+      break;
+  }
 }
 
 function create() {
@@ -224,7 +254,9 @@ function createGroup(){
     }
   ];
   //creating group colors
-  colors = ['#1c2427', '#c9af40', '#181f67', '#c22b31', '#99ff00', '#696456']
+  //colors = ['#0d47a1', '#e53935', '#ffb300', '#004d40', '#99ff00', '#696456']
+  colors = ['#a7ffeb', '#ffccbc', '#d1c4e9', '#bbdefb', '#99ff00', '#696456']
+  
 
   var groupN = 1;
   /*for(var i  = 3; i < 2048; i++){
@@ -245,4 +277,3 @@ function createGroup(){
   group[513] = -1;*/
   group[1024] = -1;
 }
- 
