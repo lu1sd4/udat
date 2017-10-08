@@ -18,7 +18,7 @@
                          .translate([map_width / 2, map_height / 2]);
 
   var path = d3.geo.path()
-                     .projection(projection);
+                   .projection(projection);
 
   // Set svg width & height
   var svg = d3.select('#map')

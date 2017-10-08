@@ -7,11 +7,13 @@
 }
 
 .bar {
-  fill: silver;
+  transition: 0.1s all;
+  fill: #308AFF;
 }
 
 .bar:hover {
-  fill: gray;
+  transition: 0.1s all;
+  fill: #AACFFF;
 }
 
 .axis--x path {

@@ -3,14 +3,45 @@ $(function(){
 	var visTitle = "Producto: Cacao";
 	$("#vis-title").text(visTitle);
 
-	var map_width = 600,
-	map_height = 750,
-	centered;
+	var map_width = $("#map").parent().width(),
+		map_height = 800,
+		centered;
+
+	var sch = [
+				['#FF6B6B', '#FFBABA', '#FF8F8F', '#FF4C4C', '#E92525'],
+				['#FFC0C0', '#FFE6E6', '#FFD3D3', '#FFADAD', '#FF9A9A'],
+				['#FFCBCB', '#FF9C9C', '#FF3939', '#FF8383', '#FF0909'],
+				[
+					'#FFCBCB',
+					'#FF8787',
+					'#FFA2A2',
+					'#FF5555',
+					'#FF0808'
+				],
+				[
+					'#F3F8FE',
+					'#61A1F3',
+					'#9DC4F6',
+					'#2A82F2',
+					'#036BF0'
+				],
+				[
+					'#EAF3FF',
+					'#AACFFF',
+					'#71AFFF',
+					'#308AFF',
+					'#005FD9'
+				]
+			  ];
+
+
+   
+
 
 	  // Define color scale
-	var color = d3.scaleLinear()
-  				  .clamp(true)
-	  			  .range(['#fff', '#26a69a']);
+	var color = d3.scaleQuantile()	
+
+	  			  .range(sch[5]);
 
 	var projection = d3.geoMercator()
   					   .scale(2500)
@@ -70,15 +101,27 @@ $(function(){
 		if(d && d.properties){
 			var nombres = data.map(function(d){ return d.key });			
 			var idx = nombres.indexOf(d.properties.NOMBRE_DPT);
-			if(idx == -1) return color(0);
+			if(idx == -1) return color.range()[0];
 	  		return color(data[idx].value.unidades);
 		}
 	}
 
+	function updateDeptInfo(d){
+		var dp = data.filter(function(g){ return g.key == d.properties.NOMBRE_DPT; });
+		$("#info-area").text(d.properties.AREA);
+		$("#info-toneladas").text(dp[0].value.toneladas);
+		$("#info-pesos").text(dp[0].value.valormilespesos);
+		updateChart(d.properties.NOMBRE_DPT);
+	}
+
 	// When clicked, zoom in
 	function clicked(d) {
+		$(".table").removeClass("invisible");
 	  	var x, y, k;
-
+	  	if(d && d.properties){
+    		updateDeptInfo(d);
+    		depName.text(d.properties.NOMBRE_DPT);
+	  	}
 	    // Compute centroid of the selected path
 	    if (d && centered !== d) {
 	    	var centroid = path.centroid(d);
@@ -86,8 +129,6 @@ $(function(){
 	    	y = centroid[1];
 	    	k = 4;
 	    	centered = d;
-	    	if(d && d.properties)
-	    		updateChart(d.properties.NOMBRE_DPT);
 	    } else {
 	    	x = map_width / 2;
 	    	y = map_height / 2;
@@ -95,9 +136,11 @@ $(function(){
 	    	centered = null;
 	    }
 
+
+
 	    // Highlight the clicked province
 	    mapLayer.selectAll('path')
-	    		.style('fill', function(d){return centered && d===centered ? '#D5708B' : fillFn(d);});
+	    		.style('fill', function(d){return centered && d===centered ? '#00bfa5' : fillFn(d);});
 
 	    // Zoom
 	    map_g.transition()
@@ -106,14 +149,29 @@ $(function(){
 	}
 
 	function mouseover(d){
-	    d3.select(this).style('fill', '#00bfa5');
-	    depName.text(d.properties.NOMBRE_DPT);
+
+		svg.selectAll("path").sort(function (a, b) { 			// select the parent and sort the path's							      
+							      if (a.properties.DPTO != d.properties.DPTO) return -1;  // a is not the hovered element, send "a" to the back
+							      else return 1;                // a is the hovered element, bring "a" to the front
+							  });
+
+	    d3.select(this).transition().duration(150)
+	    			   .style("stroke","#003882")
+	    			   .style('stroke-width', '3')
+	    			   .style('stroke-opacity', '0.8');
+
+	    //depName.text(d.properties.NOMBRE_DPT);
 	}
 
 	function mouseout(d){
 	    // Reset province color
+
+	    d3.select(this).transition().duration(150)
+	    			   .style("stroke","#000")
+	    			   .style('stroke-width', '0.7')
+	    			   .style('stroke-opacity', '0.5');
 	    mapLayer.selectAll('path')
-	    .style('fill', function(d){return centered && d===centered ? '#D5708B' : fillFn(d);});
+	    		.style('fill', function(d){return centered && d===centered ? '#00bfa5' : fillFn(d);});
 	}
 
 	$('#tab-menu a').click(function (e) {
@@ -128,7 +186,7 @@ $(function(){
 	$("#bar_svg").attr("width", $("#bar_svg").parent().width());
 
 	var bar_svg = d3.select("#bar_svg"),
-		margin = { top:20, right: 20, bottom: 30, left: 100 },
+		margin = { top:20, right: 20, bottom: 30, left: 80 },
 		width = +bar_svg.attr("width") - margin.left - margin.right,
 		height = +bar_svg.attr("height") - margin.top - margin.bottom,
 		g = bar_svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -146,8 +204,8 @@ $(function(){
 		years.push(i);
 
 	var xAxis = g.append("g")
-		 			 .attr("class", "axis axis--x")
-		 			 .attr("transform", "translate(0,"+height+")");
+	 			 .attr("class", "axis axis--x")
+	 			 .attr("transform", "translate(0,"+height+")");
 
 	var yAxis = g.append("g")
 				 .attr("class", "axis--y");
@@ -200,7 +258,7 @@ $(function(){
 		  	var features = mapData.features;
 
 		    // Update color scale domain based on data
-		    color.domain([0, d3.max(data, function(d){ return d.value.unidades; })]);
+		    color.domain(data.map(function(d){ return d.value.unidades; }));
 
 		    // Draw each province as a path
 		    mapLayer.selectAll('path')
@@ -212,12 +270,38 @@ $(function(){
 				    .on('mouseover', mouseover)
 				    .on('mouseout', mouseout)
 				    .on('click', clicked);
+
 		});
 
 	});
 
+	var yLabel = g.append("text")
+		      	  .attr("transform", "rotate(-90)")
+		      	  .attr("y", -78)
+		      	  .attr("x", 20)
+		      	  .attr("font-size", "12px")
+		      	  .attr("dy", "0.71em")
+		      	  .attr("fill", "#000")
+		      	  .text("Cantidad exportada, KG");
+
+	var clickLabel = g.append("text")
+			      	  .attr("y", -100)
+			      	  .attr("x", 100)
+			      	  .attr("font-size", "13px")
+			      	  .attr("dy", "0.71em")
+			      	  .attr("fill", "#000")
+			      	  .text("Clickea una barra para ver los datos de ese año");
+
 	function updateChart(departamento){
+		console.log(departamento)
+		console.log(data.map(function(d){ return d.key }))
 		var data_dpto = data.filter(function(d){ return d.key == departamento })[0];
+
+		yLabel.transition()
+			  .attr("x", -150);
+
+		clickLabel.transition()
+				  .attr("y", 0);
 
 		x.domain(years);
 
@@ -265,6 +349,12 @@ $(function(){
 
 	function makeChartByMonth(data_year){
 		
+		yLabel.transition()
+			  .attr("x", -150)
+
+		clickLabel.transition()
+				  .attr("y", -100);
+
 		x.domain(monthNames);
 
 		y.domain([
