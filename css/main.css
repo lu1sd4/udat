@@ -1,10 +1,31 @@
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-width: 1.5px;
+}
+
+.bar {
+  fill: silver;
+}
+
+.bar:hover {
+  fill: gray;
+}
+
 .axis--x path {
   display: none;
 }
 
+label span{
+	white-space: normal
+}
 
-.line {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5px;
+.btn-outline-dark:hover{
+	background: silver;
+}
+
+.btn-outline-dark.active:hover{
+	background: silver;
 }
