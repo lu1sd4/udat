@@ -8,18 +8,19 @@
       centered;
 
   // Define color scale
-  var color = d3.scale.linear()
-    .domain([1, 20])
-    .clamp(true)
-    .range(['#fff', '#26a69a']);
+  var color = d3.scaleLinear()
+    .domain([1, 70])
+    .range([d3.rgb("#efc2b3"), d3.rgb('#e85220')])
+    .interpolate(d3.interpolateHcl)
+    .clamp(true);
 
-  var projection = d3.geo.mercator()
+  var projection = d3.geoMercator()
     .scale(50)
     // Center the Map in Colombia
     .center([-74, 4.5])
     .translate([width / 2, height / 2]);
 
-  var path = d3.geo.path()
+  var path = d3.geoPath()
     .projection(projection);
 
   // Set svg width & height
@@ -68,6 +69,9 @@
       .enter().append('path')
         .attr('d', path)
         .attr('vector-effect', 'non-scaling-stroke')
+        .attr('id', function(d){
+          return d.properties.name+"";
+        })
         .style('fill', fillFn)
         .on('mouseover', mouseover)
         .on('mouseout', mouseout)
@@ -87,7 +91,8 @@
 
   // Get province color
   function fillFn(d){
-    return color(nameLength(d));
+    //return color(nameLength(d));
+    return '#FFFFFF';
   }
 
   // When clicked, zoom in
@@ -96,6 +101,7 @@
 
     // Compute centroid of the selected path
     if (d && centered !== d) {
+      console.log(d);
       var centroid = path.centroid(d);
       x = centroid[0];
       y = centroid[1];
@@ -128,6 +134,7 @@
 
   function mouseout(d){
     // Reset province color
+    console.log(d);
     mapLayer.selectAll('path')
       .style('fill', function(d){return centered && d===centered ? '#D5708B' : fillFn(d);});
 
@@ -164,27 +171,36 @@
     
   }
 
+
+
+
+
   function fillCountries(product){
+    console.log('llama');
+
     var monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    product = product.toLowerCase();
+
     d3.csv("data/global/imports/" + product +".csv", function(error, csv_data){
+
+      //console.log(csv_data);
+
       var data = d3.nest()
-           .key(function(d){ return d.paisorigen; })         
-           .key(function(d){ return d.anio; }).sortKeys(d3.ascending)
-           .key(function(d){ return d.mes; }).sortKeys(function(a, b){ return monthNames.indexOf(a) - monthNames.indexOf(b); })
-           .rollup(function(d){
-                      return {
-                            "volumentoneladas" : d3.sum(d, function(g){ return g.volumentoneladas;}), 
-                            "cantidadunidades" : d3.sum(d, function(g){ return g.cantidadunidades;}),
-                            "valormilespesos" : d3.sum(d, function(g){ return g.valormilespesos;})
-                          }
-                    })
-           .entries(csv_data);
-      console.log(csv_data);
-    //console.log(data)
+             .key(function(d){ return d.paisorigen; })         
+             .key(function(d){ return d.anio; }).sortKeys(d3.ascending)
+             .key(function(d){ return d.mes; }).sortKeys(function(a, b){ return monthNames.indexOf(a) - monthNames.indexOf(b); })
+             .rollup(function(d){
+                        return {
+                              "volumentoneladas" : d3.sum(d, function(g){ return g.volumentoneladas;}), 
+                              "cantidadunidades" : d3.sum(d, function(g){ return g.cantidadunidades;}),
+                              "valormilespesos" : d3.sum(d, function(g){ return g.valormilespesos;})
+                            }
+                      })
+             .entries(csv_data);
+      //console.log(data)
       for(var i = 0; i < data.length; i++)
         aggregate(data[i])
-      console.log(data)
+
+      
 
       function aggregate(node){
           if (node.hasOwnProperty("value"))
@@ -204,9 +220,32 @@
           return;
       }
 
-    });
-  }
+      data.sort(function(a, b){
+        return a.value.volumentoneladas - b.value.volumentoneladas;
+      });
 
+      console.log(data)
+      /*for(var i = 0; i < data.length; i++){
+        console.log(data[i].key);
+      }*/
+
+      var country;
+      for(var i= 0; i < data.length; i++){
+        country = d3.select('#' + data[i].key);
+        if(country !== 'undefined'){
+          d3.select('#' + data[i].key).style('fill', color(i));
+        }
+      }
+
+      for(var i = 0; i < 70; i++){
+        console.log(color(i));
+      }
+      console.log(color.range);
+    });
+     
+
+    
+  }
 
 
   $('#tab-menu a').click(function (e) {
@@ -218,44 +257,3 @@
 
 })();
 
-function fillCountries(product){
-  product = product.toLowerCase();
-  console.log('paises');
-  d3.csv("data/global/imports/" + product +".csv", function(error, csv_data){
-    var data = d3.nest()
-         .key(function(d){ return d.paisorigen; })         
-         .key(function(d){ return d.anio; }).sortKeys(d3.ascending)
-         .key(function(d){ return d.mes; }).sortKeys(function(a, b){ return monthNames.indexOf(a) - monthNames.indexOf(b); })
-         .rollup(function(d){
-                    return {
-                          "toneladas" : d3.sum(d, function(g){ return g.toneladas;}), 
-                          "unidades" : d3.sum(d, function(g){ return g.cantidadunidades;}),
-                          "valormilespesos" : d3.sum(d, function(g){ return g.valormilespesos;})
-                        }
-                  })
-         .entries(csv_data);
-  //console.log(data)
-    for(var i = 0; i < data.length; i++)
-      aggregate(data[i])
-    console.log(data)
-
-    function aggregate(node){
-        if (node.hasOwnProperty("value"))
-            return;
-        var ans = {};
-        ans.toneladas = 0;
-        ans.unidades = 0;
-        ans.valormilespesos = 0;
-        for(var i = 0; i < node.values.length; i++){
-          var child = node.values[i];
-            aggregate(child);
-            ans.toneladas += child.value.toneladas;
-            ans.unidades += child.value.unidades;
-            ans.valormilespesos += child.value.valormilespesos;
-        }
-        node.value = ans;
-        return;
-    }
-
-  });
-}
