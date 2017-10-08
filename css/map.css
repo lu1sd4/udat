@@ -17,7 +17,7 @@
   pointer-events:none;
 }
 
-body{
+.container-fluid{
   font-family: 'Alegreya', serif;
 }
 
@@ -44,46 +44,24 @@ text.big-text{
 }
 
 .map-container{
-  padding-top: 1em;
+  height: 100%;
 }
 
 .map-info-row{
-  padding-top:0.5em;
+  height: 624px;
 }
 
 #dep-name{
   color:rgba(0, 0, 0, 0.6);
   letter-spacing: 2px;
-  margin-top: 2em;
+  margin-top: 0.5em;
   padding-left: 2em;
   font-size: 30px;
 }
 
-#vis-title{
-  color:rgba(0, 0, 0, 0.8);
-  font-weight: 400;
-  margin-top: 0.8em;
-  margin-bottom: 0em;
-}
-
-#tab-menu{
-  margin-top:2em;
-}
-
-#tab-menu .nav-link{
-  font-size: 20px;
-  color:black;
-}
-
-#tab-menu .nav-link.active{
-  background-color:#efefef;
-  color:black;
-}
-
-
 .table tr td{
   border: none;
-  font-size: 20px;
+  font-size: 16px;
   color:rgba(0, 0, 0, 0.6);
 }
 
@@ -91,8 +69,29 @@ text.big-text{
   border: none;
 }
 
+.table{
+  margin-bottom: 0.5rem;
+}
+
 .table th[scope="row"]{
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 200;
   text-align: right;
+}
+
+.navbar-light .navbar-nav .nav-item.active{
+  background-color: #212529;
+  
+}
+
+.navbar-light .navbar-nav .nav-link{
+  font-weight: 300;
+}
+
+.navbar-light .navbar-nav .active>.nav-link{
+  color: white;
+}
+
+.navbar-brand{
+  margin-right: 2em;
 }

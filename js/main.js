@@ -4,7 +4,7 @@ $(function(){
 	$("#vis-title").text(visTitle);
 
 	var map_width = $("#map").parent().width(),
-		map_height = 800,
+		map_height = $("#map").parent().height(),
 		centered;
 
 	var sch = [
@@ -39,13 +39,12 @@ $(function(){
 
 
 	  // Define color scale
-	var color = d3.scaleQuantile()	
-
+	var color = d3.scaleQuantile()
 	  			  .range(sch[5]);
 
 	var projection = d3.geoMercator()
-  					   .scale(2500)
-  					   .center([-74, 4.5])
+  					   .scale(1800)
+  					   .center([-74, 4.2])
   					   .translate([map_width / 2, map_height / 2]);
 
   	var path = d3.geoPath()
@@ -70,17 +69,6 @@ $(function(){
 
 	var mapLayer = map_g.append('g')
 	  					.classed('map-layer', true);
-
-	var dummyText = map_g.append('text')
-	  					 .classed('dummy-text', true)
-	  					 .attr('x', 10)
-	  					 .attr('y', 30)
-	  					 .style('opacity', 0);
-
-	var bigText = map_g.append('text')
-					   .classed('big-text', true)
-	  				   .attr('x', 20)
-	  				   .attr('y', 45);
 
 	var depName = $("#dep-name");
 
@@ -180,13 +168,13 @@ $(function(){
   	})
 
 	var monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-
+	
 	// variables for bar chart
 
 	$("#bar_svg").attr("width", $("#bar_svg").parent().width());
 
 	var bar_svg = d3.select("#bar_svg"),
-		margin = { top:20, right: 20, bottom: 30, left: 80 },
+		margin = { top:20, right: 20, bottom: 20, left: 80 },
 		width = +bar_svg.attr("width") - margin.left - margin.right,
 		height = +bar_svg.attr("height") - margin.top - margin.bottom,
 		g = bar_svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -364,7 +352,7 @@ $(function(){
 
 		xAxis.transition()
 			 .duration(tDuration)
-			 .call(d3.axisBottom(x));
+			 .call(d3.axisBottom(x).tickFormat(function(d){ return d.slice(0,3); }));
 
 		yAxis.transition()
 			 .duration(tDuration)
@@ -390,6 +378,24 @@ $(function(){
 			.attr("height", function(d){ console.log("here"); return height - y(d.value.unidades); })
 			.attr("y", function(d){ console.log("here"); return y(d.value.unidades); });
 
+	}
+
+	$("#nav-exp").click(function(e){
+		$("#nav-imp").removeClass("active");
+		$(this).addClass("active");
+		scrollTo("body")
+	})
+
+	$("#nav-imp").click(function(e){
+		$("#nav-exp").removeClass("active");
+		$(this).addClass("active");
+		scrollTo("#imports-row")
+	})
+
+	function scrollTo(selector){
+		$('html, body').animate({
+    		scrollTop: ($(selector).offset().top)
+		},500);
 	}
 
 });
