@@ -62,7 +62,10 @@ body{
   margin-top:2em;
 }
 
-.map-info .nav-link{
+#tab-menu .nav-link{
   color:white;
 }
 
+#tab-menu .nav-link.active{
+  color:black;
+}
