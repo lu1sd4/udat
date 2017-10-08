@@ -56,7 +56,7 @@
   var depName = $("#dep-name");
 
   // Load map data
-  d3.json('countries.geo.json', function(error, mapData) {
+  d3.json('countr.geo.json', function(error, mapData) {
     var features = mapData.features;
 
     // Update color scale domain based on data
