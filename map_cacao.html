@@ -36,10 +36,9 @@
             <div class="col-6 map-container">
                 <svg id="map"></svg>
             </div>
-
             <div class="col-6 map-info">
-                <h4 id="dep-name">Clickea un departamento en el mapa</h4>
-                <table class="table table-sm invisible">
+                <h4 id="dep-name">Clickea un departamento</h4>
+                <table id="local-table" class="table table-sm invisible">
                     <tbody>
                         <tr>
                             <th scope="row">Área:</th>
@@ -60,7 +59,33 @@
         </div>
 
         <div id="imports-row" class="row map-info-row">
-            
+            <div class="col-8">
+                <svg id="world_svg" height="420"></svg>
+            </div>
+            <div class="col-6 world-map-info">
+                <h4 id="dep-name">Clickea un país</h4>
+                <table id="global-table" class="table table-sm invisible">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Nombre:</th>
+                            <td><span id="info-nombre"></span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Exportación</th>
+                            <td><span id="info-exportacion"></span> Pesos Colombianos</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Importación:</th>
+                            <td><span id="info-importacion"></span> Pesos Colombianos</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Diferencia:</th>
+                            <td><span id="info-diferencia"></span> Pesos Colombianos</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <svg id="bar_svg" height="420"></svg>
+            </div>
         </div>
 
     </div>
@@ -70,5 +95,6 @@
     <script src="libs/bootstrap/js/bootstrap.min.js"></script>
     <script src="libs/d3/d3.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/world-map.js"></script>
 
 </body>
