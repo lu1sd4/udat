@@ -14,17 +14,17 @@
 <body>
 
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg sticky-top">
-        <a href="#" class="navbar-brand">Cacao</a>
+        <a href="#" class="navbar-brand"><span id="navbarTitle">Cacao</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse mt-2 mt-lg-0" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li id="nav-exp" class="nav-item active">
-                    <a class="nav-link">Exportación</a>
+                    <a class="nav-link">Nacional</a>
                 </li>
                 <li id="nav-imp" class="nav-item">
-                    <a class="nav-link">Importación</a>
+                    <a class="nav-link">Global</a>
                 </li>
             </ul>
         </div>
@@ -32,11 +32,13 @@
 
     <div class="container-fluid gral-container">
 
-        <div id="exports-row" class="row map-info-row">
+        <div id="exports-row" class="row map-info-row">            
             <div class="col-6 map-container">
                 <svg id="map"></svg>
             </div>
             <div class="col-6 map-info">
+                <h3>Exportación de cacao por departamento</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, labore consectetur consequuntur. Sequi repellendus nobis numquam in corporis eos molestias, laudantium cum.</p>
                 <h4 id="dep-name">Clickea un departamento</h4>
                 <table id="local-table" class="table table-sm invisible">
                     <tbody>
@@ -45,24 +47,26 @@
                             <td><span id="info-area"></span> m<sup>2</sup></td>
                         </tr>
                         <tr>
-                            <th scope="row">Exportación anual:</th>
+                            <th scope="row">Exportación (2006-2017):</th>
                             <td><span id="info-toneladas"></span> toneladas</td>
                         </tr>
                         <tr>
-                            <th scope="row">Ingreso anual:</th>
-                            <td><span id="info-pesos"></span> Pesos Colombianos</td>
+                            <th scope="row">Ingreso (2006-2017):</th>
+                            <td><span id="info-pesos"></span> COP</td>
                         </tr>
                     </tbody>
                 </table>
-                <svg id="bar_svg" height="420"></svg>
+                <svg id="bar_svg" height="340"></svg>
             </div>
         </div>
-
+        <hr>
         <div id="imports-row" class="row map-info-row">
-            <div class="col-8">
+            <div class="col-8 text-center">
+                <select id="yearSelect">            
+                </select>
                 <svg id="world_svg" height="420"></svg>
             </div>
-            <div class="col-6 world-map-info">
+            <div class="col-4 world-map-info">
                 <h4 id="dep-name">Clickea un país</h4>
                 <table id="global-table" class="table table-sm invisible">
                     <tbody>
@@ -72,15 +76,15 @@
                         </tr>
                         <tr>
                             <th scope="row">Exportación</th>
-                            <td><span id="info-exportacion"></span> Pesos Colombianos</td>
+                            <td><span id="info-exportacion"></span> COP</td>
                         </tr>
                         <tr>
                             <th scope="row">Importación:</th>
-                            <td><span id="info-importacion"></span> Pesos Colombianos</td>
+                            <td><span id="info-importacion"></span> COP</td>
                         </tr>
                         <tr>
                             <th scope="row">Diferencia:</th>
-                            <td><span id="info-diferencia"></span> Pesos Colombianos</td>
+                            <td><span id="info-diferencia"></span> COP</td>
                         </tr>
                     </tbody>
                 </table>
@@ -94,6 +98,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>    
     <script src="libs/bootstrap/js/bootstrap.min.js"></script>
     <script src="libs/d3/d3.min.js"></script>
+    <script src="libs/d3-legend/d3-legend.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/world-map.js"></script>
 

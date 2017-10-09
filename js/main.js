@@ -131,6 +131,7 @@ $(function(){
 		    			   .style("stroke","#000")
 		    			   .style('stroke-width', '0.7')
 		    			   .style('stroke-opacity', '0.5');
+		    			   		    			   
 		    mapLayer.selectAll('path')
 		    		.style('fill', function(d){return centered && d===centered ? '#00bfa5' : fillFn(d);});
 		}

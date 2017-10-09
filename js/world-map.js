@@ -10,8 +10,8 @@
                 .clamp(true);
 
   var projection = d3.geoMercator()
-                     .scale(100)    
-                     .center([0, 4.5])
+                     .scale(120)    
+                     .center([0, 40])
                      .translate([width / 2, height / 2]);
 
   var path = d3.geoPath()
@@ -42,6 +42,8 @@
 
   var data_yr;
 
+  var currentYear = 2006;
+
 
   // Get province name
   function nameFn(d){
@@ -65,10 +67,23 @@
     }
   }
 
+  function updateCountryInfo(d){
+      var dp = data_yr.values.filter(function(g){ return g.key == d.properties.name; });
+      $("#info-nombre").text(dp[0].key);
+      $("#info-importacion").text(dp[0].value.importacion);
+      $("#info-exportacion").text(dp[0].value.exportacion);
+      var diff = dp[0].value.exportacion - dp[0].value.importacion;
+      $("#info-diferencia").text(diff);
+  }
+
   // When clicked, zoom in
   function clicked(d) {
+    if(d && d.properties){
+      updateCountryInfo(d);
+      $("#global-table").removeClass("invisible");
+    }
     var x, y, k;
-    // Compute centroid of the selected path
+    // Compute centroid of the selected path    
     if (d && centered !== d) {
       console.log(d);
       var centroid = path.centroid(d);
@@ -83,11 +98,6 @@
       centered = null;
     }
 
-    // Highlight the clicked province
-    mapLayer.selectAll('path')
-      .style('fill', function(d){return centered && d===centered ? '#D5708B' : fillFn(d);});
-
-    // Zoom
     g.transition()
       .duration(750)
       .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')scale(' + k + ')translate(' + -x + ',' + -y + ')');
@@ -96,7 +106,9 @@
   function mouseover(d){
     // Highlight hovered province
     d3.select(this).transition().duration(150)
-                   .style('fill', '#00bfa5');
+                   .style("stroke","#000")
+                   .style('stroke-width', '2')
+                   .style('stroke-opacity', '0.8');
 
     // Draw effects
     //textArt(nameFn(d));
@@ -106,12 +118,42 @@
     // Reset province color
     
     d3.select(this).transition().duration(150)
-                   .style('fill', fillFn(d));
-
-    mapLayer.selectAll('path')
-            .style('fill', function(d){return centered && d===centered ? '#D5708B' : fillFn(d);});
+                 .style("stroke","#000")
+                 .style('stroke-width', '0.7')
+                 .style('stroke-opacity', '0.5');
+    
 
   }
+
+  var yearSVGText;
+
+  var yearSelect = $("#yearSelect");
+
+  var features;
+
+  for(var i = 2006; i <= 2017; i++)
+    yearSelect.append("<option value='"+i+"'>"+i+"</option>");
+  
+  yearSelect.change(function(){
+    updateGlobalYear($(this).val());
+  })
+
+  function updateGlobalYear(newYear){
+
+    currentYear = newYear;
+
+    data_yr = data.filter(function(d){ return d.key == currentYear; })[0];
+
+    mapLayer.selectAll('path')
+            .data(features)
+            .transition()
+            .style('fill', fillFn);
+
+    yearSVGText.transition()
+               .text(currentYear);
+  }
+
+
 
   d3.csv("data/global/imports/cacao.csv", function(error, csv_imports){
 
@@ -164,11 +206,11 @@
           });
         });
 
-        data_yr = data.filter(function(d){ return d.key == '2006'; })[0];
+        data_yr = data.filter(function(d){ return d.key == currentYear; })[0];
         console.log(data);
         
         d3.json('countries.geo.json', function(error, mapData) {
-          var features = mapData.features;
+          features = mapData.features;
 
           var diffs = data.map(function(d){ return d.values.map(function(g){ return g.value.exportacion - g.value.importacion; }) });
           console.log(diffs);
@@ -194,6 +236,14 @@
                   .on('mouseover', mouseover)
                   .on('mouseout', mouseout)
                   .on('click', clicked);
+
+          yearSVGText = g.append('text')
+                      .attr('y', height - 150)
+                      .attr('x', 60)
+                      .attr('font-size', '40px')
+                      .attr('fill', '#000')
+                      .attr('class', 'textYear')
+                      .text(currentYear);
 
         });
 

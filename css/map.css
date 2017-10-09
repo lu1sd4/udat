@@ -6,6 +6,10 @@
   pointer-events: all;
 }
 
+.textYear{
+  font-family: 'Alegreya', serif;
+}
+
 .map-layer {
   fill: #fff;
   stroke: #000;
@@ -13,31 +17,9 @@
   stroke-opacity: 0.5;
 }
 
-.effect-layer{
-  pointer-events:none;
-}
-
 .container-fluid{
   font-family: 'Alegreya', serif;
 }
-
-text{
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 300;
-}
-
-text.big-text{
-  font-size: 30px;
-  font-weight: 400;
-}
-
-.effect-layer text, text.dummy-text{
-  font-size: 12px;
-}
-
-
-/* Css Adicional */
-
 
 .gral-container{
  /*min-width: 1200px;*/
@@ -51,12 +33,19 @@ text.big-text{
   height: 624px;
 }
 
+.map-info{
+  padding-top: 0.5rem;
+}
+
+.map-info p{
+  font-weight: 200;
+}
+
 #dep-name{
   color:rgba(0, 0, 0, 0.6);
   letter-spacing: 2px;
   margin-top: 0.5em;
   padding-left: 2em;
-  font-size: 30px;
 }
 
 .table tr td{
@@ -94,4 +83,8 @@ text.big-text{
 
 .navbar-brand{
   margin-right: 2em;
+}
+
+#imports-row{
+  padding-top:60px;
 }
