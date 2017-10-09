@@ -10,6 +10,11 @@
   font-family: 'Alegreya', serif;
 }
 
+.legendQuant{
+  font-family: 'Tahoma', serif;
+  font-size: 12px;
+}
+
 .map-layer {
   fill: #fff;
   stroke: #000;
@@ -45,7 +50,6 @@
   color:rgba(0, 0, 0, 0.6);
   letter-spacing: 2px;
   margin-top: 0.5em;
-  padding-left: 2em;
 }
 
 .table tr td{
@@ -60,6 +64,12 @@
 
 .table{
   margin-bottom: 0.5rem;
+}
+
+@media(min-width: 1441px){
+  #exports-row{
+    padding-top:2rem;
+  }
 }
 
 .table th[scope="row"]{

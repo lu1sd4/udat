@@ -1,5 +1,27 @@
 (function(){
 
+  var getUrlParameter = function getUrlParameter(sParam) {
+      var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+          sURLVariables = sPageURL.split('&'),
+          sParameterName,
+          i;
+
+      for (i = 0; i < sURLVariables.length; i++) {
+          sParameterName = sURLVariables[i].split('=');
+
+          if (sParameterName[0] === sParam) {
+              return sParameterName[1] === undefined ? true : sParameterName[1];
+          }
+      }
+  };
+
+  var validProducts = ["cacao", "cafe", "yuca", "algodon"];
+
+  var productName = getUrlParameter("producto");
+  if(productName == undefined || !validProducts.includes(productName)){
+    productName = "cacao";
+  }  
+
   var width = $("#world_svg").parent().width(),
       height = $("#world_svg").parent().height(),
       centered;
@@ -59,7 +81,6 @@
   // Get province color
   function fillFn(d){ 
     if(d && d.properties){
-      console.log(data_yr);
       var nombres = data_yr.values.map(function(d){ return d.key });
       var idx = nombres.indexOf(d.properties.name);
       if(idx == -1) return 'white';
@@ -69,23 +90,34 @@
 
   function updateCountryInfo(d){
       var dp = data_yr.values.filter(function(g){ return g.key == d.properties.name; });
-      $("#info-nombre").text(dp[0].key);
-      $("#info-importacion").text(dp[0].value.importacion);
-      $("#info-exportacion").text(dp[0].value.exportacion);
-      var diff = dp[0].value.exportacion - dp[0].value.importacion;
-      $("#info-diferencia").text(diff);
+      if(dp[0] == undefined){
+        $("#info-nombre").text(d.properties.name+" - no hay datos de importación/exportación");
+        $("#global-table").addClass("invisible");
+      } else {
+        $("#info-nombre").text(dp[0].key);
+        $("#info-importacion").text(d3.format(",.15d")(dp[0].value.importacion));
+        $("#info-exportacion").text(d3.format(",.15d")(dp[0].value.exportacion));
+        var diff = dp[0].value.exportacion - dp[0].value.importacion;
+        $("#info-diferencia").text(d3.format(",.15d")(diff));
+        if(diff < 0){
+          $("#dif-bg").css("background-color", "rgb(255,187,187)")
+        } else if(diff > 0){
+          $("#dif-bg").css("background-color", "rgb(176,216,176)")  
+        } else{
+          $("#dif-bg").css("background-color", "#FFF")  
+        }        
+        $("#global-table").removeClass("invisible");
+      }
   }
 
   // When clicked, zoom in
   function clicked(d) {
     if(d && d.properties){
       updateCountryInfo(d);
-      $("#global-table").removeClass("invisible");
     }
     var x, y, k;
     // Compute centroid of the selected path    
     if (d && centered !== d) {
-      console.log(d);
       var centroid = path.centroid(d);
       x = centroid[0];
       y = centroid[1];
@@ -131,8 +163,14 @@
 
   var features;
 
-  for(var i = 2006; i <= 2017; i++)
-    yearSelect.append("<option value='"+i+"'>"+i+"</option>");
+  var yearsYuca = [2006, 2007, 2008, 2009, 2010, 2012];
+  if(productName == "yuca"){
+    for(var i = 0; i < yearsYuca.length; i++)
+      yearSelect.append("<option value='"+yearsYuca[i]+"'>"+yearsYuca[i]+"</option>")
+  } else {
+    for(var i = 2006; i <= 2017; i++)
+      yearSelect.append("<option value='"+i+"'>"+i+"</option>");
+  }
   
   yearSelect.change(function(){
     updateGlobalYear($(this).val());
@@ -155,7 +193,7 @@
 
 
 
-  d3.csv("data/global/imports/cacao.csv", function(error, csv_imports){
+  d3.csv("data/global/imports/"+productName+".csv", function(error, csv_imports){
 
       //console.log(csv_imports);
 
@@ -169,7 +207,7 @@
                                         })
                       .entries(csv_imports);
 
-      d3.csv("data/global/exports/cacao.csv", function(error, csv_exports){
+      d3.csv("data/global/exports/"+productName+".csv", function(error, csv_exports){
 
         var data_ex = d3.nest()
                         .key(function(d){ return d.anio; }).sortKeys(d3.ascending)         
@@ -206,18 +244,17 @@
           });
         });
 
-        data_yr = data.filter(function(d){ return d.key == currentYear; })[0];
-        console.log(data);
+        data_yr = data.filter(function(d){ return d.key == currentYear; })[0];        
         
         d3.json('countries.geo.json', function(error, mapData) {
           features = mapData.features;
 
           var diffs = data.map(function(d){ return d.values.map(function(g){ return g.value.exportacion - g.value.importacion; }) });
-          console.log(diffs);
+          //console.log(diffs);
           var mindiff = d3.min(diffs, function(d){ return d3.min(d) });
           var maxdiff = d3.max(diffs, function(d){ return d3.max(d) });
-          console.log("min: "+mindiff);
-          console.log("max: "+maxdiff);
+          //console.log("min: "+mindiff);
+          //console.log("max: "+maxdiff);
           
           // Update color scale domain based on data
           color.domain([
@@ -226,6 +263,39 @@
                           maxdiff
                        ]);
           // Draw each province as a path
+
+          svg.append("g")
+             .attr("class", "legendLinear")
+             .attr("transform", "translate(20,20)");
+
+          var legend = d3.legendColor()
+                         .titleWidth(100)
+                         .shapeWidth(5)
+                         .shapeHeight(8)
+                         .cells(30)
+                         .orient("horizontal")
+                         .labels(function(a){
+                            return "";
+                         })
+                         .scale(color);
+
+          svg.select(".legendLinear")          
+             .call(legend);
+
+          svg.append("text")
+             .attr("class", "legendQuant")
+             .attr("x", 10)
+             .attr("y", 15)
+             .text("Balance negativo");
+
+          svg.append("text")
+             .attr("class", "legendQuant")
+             .attr("x", 150)
+             .attr("y", 15)
+             .text("Balance positivo");
+
+          //console.log("legend")
+          //console.log(legend)
 
           mapLayer.selectAll('path')
                   .data(features)
@@ -237,13 +307,15 @@
                   .on('mouseout', mouseout)
                   .on('click', clicked);
 
-          yearSVGText = g.append('text')
+          yearSVGText = svg.append('text')
                       .attr('y', height - 150)
                       .attr('x', 60)
                       .attr('font-size', '40px')
                       .attr('fill', '#000')
                       .attr('class', 'textYear')
                       .text(currentYear);
+
+          
 
         });
 

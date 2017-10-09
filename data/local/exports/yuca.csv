@@ -1,0 +1,403 @@
+anio,mes,departamento,cantidadunidades,valormilespesos,toneladas
+2006,Abril,Caldas,464,1185.85,0.46
+2006,Abril,Antioquia,17836.8,36119.59,17.84
+2006,Abril,Bogotá,60,137.32,0.06
+2006,Agosto,Bogotá,2700,16712.36,2.7
+2006,Diciembre,Cundinamarca,1250,2268.34,1.25
+2006,Diciembre,Bogotá,432,1715.1,0.43
+2006,Diciembre,Bogotá,12000,13441.37,12
+2006,Diciembre,Bogotá,3393,7286.2,3.39
+2006,Diciembre,Risaralda,2000,6534,2
+2006,Enero,Cundinamarca,3960,25249.5,3.96
+2006,Febrero,Antioquia,1382.4,4258.23,1.38
+2006,Febrero,Antioquia,23182,39254.69,23.18
+2006,Julio,Antioquia,11199,26818.62,11.2
+2006,Julio,Antioquia,54.42,3.78,0.05
+2006,Junio,Antioquia,691.2,2815.17,0.69
+2006,Junio,Bogotá,3674,14286.57,3.67
+2006,Marzo,Cundinamarca,750,6614.7,0.75
+2006,Marzo,Magdalena,24948,22976.27,24.95
+2006,Marzo,Bogotá,5275,11340.84,5.28
+2006,Mayo,Antioquia,691.2,2792.76,0.69
+2006,Mayo,Antioquia,23727,41339.96,23.73
+2006,Mayo,Bogotá,19885,73458.38,19.89
+2006,Mayo,Cundinamarca,1200,3085.16,1.2
+2006,Mayo,Antioquia,4,5.57,0
+2006,Mayo,Valle del Cauca,1440,3544.11,1.44
+2006,Noviembre,Bogotá,2430,9450.79,2.43
+2006,Octubre,Bogotá,18135,70536.24,18.14
+2006,Octubre,Valle del Cauca,9,16.91,0.01
+2006,Octubre,Bogotá,50,87.96,0.05
+2006,Septiembre,Antioquia,23680,34335.99,23.68
+2006,Septiembre,Bogotá,2475,5576.58,2.48
+2007,Abril,Bogotá,20,43.16,0.02
+2007,Abril,Bogotá,19068,62822.51,19.07
+2007,Diciembre,Bogotá,981,1489.87,0.98
+2007,Diciembre,Caldas,240,678.94,0.24
+2007,Diciembre,Bogotá,4891.7,23267.09,4.89
+2007,Enero,Bogotá,80,211.61,0.08
+2007,Enero,Antioquia,9,13.33,0.01
+2007,Enero,Bogotá,5.38,13.57,0.01
+2007,Febrero,Bogotá,423.84,2059.69,0.42
+2007,Febrero,Antioquia,13886,40266.99,13.89
+2007,Febrero,Bogotá,3930,8247.38,3.93
+2007,Julio,Bogotá,18523,57546.12,18.52
+2007,Julio,Cundinamarca,872,3464.14,0.87
+2007,Julio,Valle del Cauca,15000,34578.72,15
+2007,Junio,Bogotá,10,76.03,0.01
+2007,Junio,Antioquia,14.85,111.45,0.01
+2007,Marzo,Bogotá,248,343.59,0.25
+2007,Marzo,Antioquia,21037,40522.51,21.04
+2007,Marzo,Bogotá,1243,5116.55,1.24
+2007,Marzo,Bogotá,7230,14271.6,7.23
+2007,Mayo,Bogotá,72,202.54,0.07
+2007,Noviembre,Valle del Cauca,120,470.1,0.12
+2007,Noviembre,Bogotá,4992.2,7479.36,4.99
+2007,Octubre,Valle del Cauca,5,1.96,0.01
+2007,Octubre,Valle del Cauca,2,1.96,0
+2007,Septiembre,Bogotá,5335,9943.52,5.34
+2008,Abril,Santander,125,130.87,0.13
+2008,Abril,Valle del Cauca,870,2897.69,0.87
+2008,Abril,Norte de Santander,225,89.64,0.23
+2008,Agosto,Santander,1170,3348.8,1.17
+2008,Agosto,Amazonas,10,27.24,0.01
+2008,Agosto,Caldas,240,677.56,0.24
+2008,Agosto,Antioquia,20400,38021.74,20.4
+2008,Agosto,Cundinamarca,2160,7705.62,2.16
+2008,Agosto,Antioquia,23971.2,43294.99,23.97
+2008,Agosto,Magdalena,100,211.46,0.1
+2008,Diciembre,Bogotá,17476.16,52180.54,17.48
+2008,Diciembre,Antioquia,44035,91160.03,44.03
+2008,Diciembre,Bogotá,23318.25,76309.19,23.32
+2008,Diciembre,Cundinamarca,150360,233056.28,150.36
+2008,Diciembre,Caldas,8,2.56,0.01
+2008,Diciembre,Antioquia,23698.8,52018.16,23.7
+2008,Diciembre,Meta,20339,40550.22,20.34
+2008,Diciembre,Quindío,46989,89713.03,46.99
+2008,Diciembre,Bogotá,25197,48997.98,25.2
+2008,Enero,Bogotá,2097.6,3568.07,2.1
+2008,Febrero,Bogotá,1759.56,3720.92,1.76
+2008,Julio,Bogotá,50,32.67,0.05
+2008,Julio,Bogotá,7.76,0.29,0.01
+2008,Julio,Santander,235,219.29,0.24
+2008,Julio,Caldas,360,966.43,0.36
+2008,Julio,Antioquia,43555.2,74666.63,43.56
+2008,Junio,Valle del Cauca,30,146.32,0.03
+2008,Junio,Antioquia,23971.2,44438.68,23.97
+2008,Marzo,Santander,525,473.28,0.53
+2008,Marzo,Bogotá,1046.4,2235.19,1.05
+2008,Marzo,Caldas,5,1.85,0.01
+2008,Marzo,Bogotá,3567,6161.24,3.57
+2008,Mayo,Santander,100,133.63,0.1
+2008,Mayo,Bogotá,2400,11041.41,2.4
+2008,Noviembre,Risaralda,1591,6808.34,1.59
+2008,Noviembre,Antioquia,57121.9,121696.08,57.12
+2008,Noviembre,Bogotá,20707,27887.7,20.71
+2008,Noviembre,Cundinamarca,61493.82,80780.57,61.49
+2008,Noviembre,Quindío,2.5,2.36,0
+2008,Noviembre,Antioquia,36392.64,87583.38,36.39
+2008,Noviembre,Bogotá,13154,29256.2,13.15
+2008,Noviembre,Meta,20325,44912.5,20.32
+2008,Noviembre,Quindío,23154,55865.66,23.15
+2008,Octubre,Antioquia,79563.5,157319.26,79.56
+2008,Octubre,Bogotá,19636,24668.88,19.64
+2008,Octubre,Caldas,8,5.1,0.01
+2008,Octubre,Santander,0.47,0.57,0
+2008,Octubre,Antioquia,20340,38432.81,20.34
+2008,Octubre,Meta,63922,129225.57,63.92
+2008,Septiembre,Bolívar,19749,37165.75,19.75
+2008,Septiembre,Caldas,3.2,8.5,0
+2008,Septiembre,Cundinamarca,19749,35994.44,19.75
+2008,Septiembre,Magdalena,71913.6,163517.71,71.91
+2009,Abril,Antioquia,23698.8,44851.53,23.7
+2009,Abril,Bogotá,430.27,4673.62,0.43
+2009,Abril,Putumayo,21818,64465.09,21.82
+2009,Abril,Bogotá,21560,20115.22,21.56
+2009,Abril,Antioquia,47399,90857.96,47.4
+2009,Abril,Bogotá,6507.92,22292.19,6.51
+2009,Abril,Meta,20339,33559.34,20.34
+2009,Agosto,Bogotá,2.2,2.12,0
+2009,Agosto,Bogotá,20702,31158.64,20.7
+2009,Diciembre,Bogotá,7313.55,26576.19,7.31
+2009,Diciembre,Bogotá,20702,32904.28,20.7
+2009,Diciembre,Antioquia,4.5,4,0
+2009,Enero,Antioquia,23698.8,47008.13,23.7
+2009,Enero,Bogotá,42180,82229.83,42.18
+2009,Enero,Cundinamarca,62626,104348.23,62.63
+2009,Enero,Bogotá,4553.24,16994.14,4.55
+2009,Enero,Antioquia,23971.2,57052.81,23.97
+2009,Enero,Cundinamarca,20593.4,48542.59,20.59
+2009,Enero,Cundinamarca,1771.87,13769.9,1.77
+2009,Febrero,Antioquia,23491.92,57102.04,23.49
+2009,Febrero,Caldas,1227.27,4663.95,1.23
+2009,Febrero,Cundinamarca,20796,36023.5,20.8
+2009,Febrero,Meta,41550.22,85537.04,41.55
+2009,Febrero,Antioquia,36293.68,92118.76,36.29
+2009,Febrero,Bogotá,12229,28015.48,12.23
+2009,Febrero,Magdalena,12203,31160.04,12.2
+2009,Febrero,Meta,43584,93865.42,43.58
+2009,Febrero,Sucre,40720,74836.3,40.72
+2009,Julio,Antioquia,11016,20913.67,11.02
+2009,Julio,Bogotá,10368,13608.35,10.37
+2009,Julio,Antioquia,19885,36027.3,19.89
+2009,Julio,Bogotá,51280,117720.76,51.28
+2009,Julio,Meta,19204,29738.03,19.2
+2009,Julio,Bogotá,840,2487.8,0.84
+2009,Junio,Risaralda,10404,36620.97,10.4
+2009,Junio,Bogotá,40021.75,86727.43,40.02
+2009,Junio,Caldas,1014.62,3664.05,1.01
+2009,Junio,Cundinamarca,3877,7059.64,3.88
+2009,Junio,Meta,19293,28247.31,19.29
+2009,Marzo,Bogotá,20470.54,67174.41,20.47
+2009,Marzo,Risaralda,11628,44992.77,11.63
+2009,Marzo,Antioquia,39944,100826.57,39.94
+2009,Marzo,Córdoba,8216,13398.8,8.22
+2009,Marzo,Meta,41498,59324.33,41.5
+2009,Marzo,Valle del Cauca,18576,39669.54,18.58
+2009,Marzo,Antioquia,23700,44803.49,23.7
+2009,Marzo,Antioquia,20,25.56,0.02
+2009,Marzo,Meta,42131,83039.38,42.13
+2009,Mayo,Bogotá,83882,150798.95,83.88
+2009,Mayo,Meta,20702,27161.58,20.7
+2009,Mayo,Meta,12677,19460.73,12.68
+2009,Noviembre,Bogotá,11587.53,12615.22,11.59
+2009,Noviembre,Risaralda,1.62,0.49,0
+2009,Noviembre,Bogotá,20158,70997.97,20.16
+2009,Noviembre,Cundinamarca,5960.11,11233.51,5.96
+2009,Octubre,Bogotá,11691.5,26916.58,11.69
+2009,Octubre,Antioquia,7354.8,12781.53,7.35
+2009,Octubre,Bogotá,9125,15452.07,9.13
+2009,Septiembre,Bogotá,22867,48225,22.87
+2009,Septiembre,Cundinamarca,7017.02,11473.08,7.02
+2010,Enero,Bogotá,1846.9,11860.29,1.85
+2010,Febrero,Bogotá,0.05,0.1,0
+2010,Febrero,Caldas,7344,14943.26,7.34
+2010,Julio,Caldas,42,499.37,0.04
+2010,Julio,Bogotá,2240,7918.67,2.24
+2010,Junio,Bogotá,245.41,1529.19,0.25
+2010,Marzo,Bogotá,491,2064.11,0.49
+2010,Mayo,Caldas,9072,17488.13,9.07
+2010,Noviembre,Bogotá,11729.4,36128.7,11.73
+2010,Octubre,Cundinamarca,940,1612.39,0.94
+2010,Octubre,Bogotá,1287.72,13971.58,1.29
+2010,Septiembre,Antioquia,2.5,12.65,0
+2011,Febrero,Caldas,14.5,3.76,0.01
+2011,Agosto,Bogotá,1962,7720.83,1.96
+2011,Agosto,Antioquia,84074,144244.99,84.07
+2011,Diciembre,Antioquia,47398,93983.26,47.4
+2011,Febrero,Cundinamarca,1961,8057.95,1.96
+2011,Julio,Antioquia,23699,38332.14,23.7
+2011,Junio,Bogotá,2539,10024.78,2.54
+2011,Junio,Antioquia,23699,37972.28,23.7
+2011,Mayo,Antioquia,22814,34060.64,22.81
+2011,Mayo,Cundinamarca,9720,14131.15,9.72
+2011,Mayo,Bogotá,690.95,3429.28,0.69
+2011,Mayo,Caldas,410,1277.54,0.41
+2011,Noviembre,Bogotá,981,4131.47,0.98
+2011,Noviembre,Antioquia,14982,28344.34,14.98
+2011,Noviembre,Antioquia,90890.67,171607.32,90.89
+2011,Noviembre,Bogotá,1673.6,8535.36,1.67
+2011,Octubre,Antioquia,22663.68,41086.37,22.66
+2011,Octubre,Caldas,864,2388.12,0.86
+2011,Octubre,Antioquia,70040,144593.09,70.04
+2011,Octubre,Antioquia,23154,48271.68,23.15
+2011,Septiembre,Córdoba,750,377.28,0.75
+2011,Septiembre,Santander,300,404.23,0.3
+2011,Septiembre,Antioquia,14982,28251.38,14.98
+2011,Septiembre,Antioquia,23699,41808.42,23.7
+2011,Septiembre,Antioquia,23154,42955.8,23.15
+2012,Abril,Sucre,259,315.7,0.26
+2012,Abril,Bogotá,43632.6,71932.34,43.63
+2012,Agosto,Bogotá,980.64,3736.73,0.98
+2012,Agosto,Antioquia,24244,48200.4,24.24
+2012,Diciembre,Bogotá,1470.96,5637.89,1.47
+2012,Diciembre,Antioquia,48459,121466,48.46
+2012,Enero,Antioquia,23922,46140.49,23.92
+2012,Febrero,Bogotá,1776.05,7057.83,1.78
+2012,Febrero,Antioquia,23699,43315,23.7
+2012,Febrero,Antioquia,10,2.61,0.01
+2012,Julio,Bogotá,540,2908.01,0.54
+2012,Junio,Caldas,163.4,534.87,0.16
+2012,Marzo,Antioquia,47621,88411.33,47.62
+2012,Marzo,Bogotá,47479,68504.38,47.48
+2012,Mayo,Bogotá,904,3306.39,0.9
+2012,Mayo,Antioquia,20430,39364.31,20.43
+2012,Mayo,Bogotá,20702.4,40918.54,20.7
+2012,Noviembre,Antioquia,23726,60321.88,23.73
+2012,Noviembre,Antioquia,23971,61187.17,23.97
+2012,Octubre,Bogotá,2408.02,9440.93,2.41
+2012,Octubre,Antioquia,23386,47874.86,23.39
+2012,Septiembre,Antioquia,23310,52317.2,23.31
+2013,Abril,Caldas,109,427.24,0.11
+2013,Abril,Antioquia,24462,57651.53,24.46
+2013,Agosto,Atlántico,14642,12011.1,14.64
+2013,Agosto,Caldas,463,2075.42,0.46
+2013,Diciembre,Valle del Cauca,40029.72,104652.12,40.03
+2013,Diciembre,Antioquia,20021,50893.55,20.02
+2013,Diciembre,Atlántico,2400,5159.73,2.4
+2013,Febrero,Antioquia,22201,53307.31,22.2
+2013,Julio,Bogotá,10,9.58,0.01
+2013,Julio,Valle del Cauca,22346.88,56894.12,22.35
+2013,Julio,Cesar,521,3162.33,0.52
+2013,Julio,Antioquia,24125,66921.72,24.13
+2013,Junio,Bogotá,1906.8,7783.53,1.91
+2013,Junio,Valle del Cauca,23529.91,59765.61,23.53
+2013,Junio,Cesar,200,114.37,0.2
+2013,Junio,Antioquia,22817,59612.47,22.82
+2013,Junio,Bogotá,3136,15958.43,3.14
+2013,Junio,Bogotá,1120,6632.83,1.12
+2013,Marzo,Bogotá,1997.6,8228.03,2
+2013,Marzo,Antioquia,138.1,435.86,0.14
+2013,Marzo,Antioquia,49008,116816.23,49.01
+2013,Mayo,Antioquia,24268,62117.39,24.27
+2013,Noviembre,Bogotá,1961.28,8054.82,1.96
+2013,Noviembre,Valle del Cauca,22238.8,57417.86,22.24
+2013,Noviembre,Caldas,326.88,1376.46,0.33
+2013,Noviembre,Cundinamarca,1820,8009.09,1.82
+2013,Noviembre,Atlántico,15181,10327.12,15.18
+2013,Octubre,Bogotá,3087.2,13115.68,3.09
+2013,Octubre,Caldas,9,2.56,0.01
+2013,Octubre,Antioquia,48623,129786.15,48.62
+2013,Septiembre,Antioquia,24380,61145.15,24.38
+2014,Abril,Bogotá,1743.36,7245.04,1.74
+2014,Abril,Bogotá,1961.28,8064.54,1.96
+2014,Abril,Bogotá,2352,12510.98,2.35
+2014,Agosto,Valle del Cauca,68668.84,175261.16,68.67
+2014,Agosto,Bogotá,2.22,4.16,0
+2014,Agosto,Bogotá,3136,17053.2,3.14
+2014,Diciembre,Bogotá,18.24,18.78,0.02
+2014,Diciembre,Valle del Cauca,19960.92,64250.61,19.96
+2014,Diciembre,Cundinamarca,23152.5,66287.49,23.15
+2014,Diciembre,Bogotá,3136,17780.83,3.14
+2014,Enero,Bogotá,1961.28,8387.27,1.96
+2014,Enero,Valle del Cauca,23974.08,61662.88,23.97
+2014,Enero,Bogotá,3268.8,13690.75,3.27
+2014,Enero,Antioquia,19867,50968.81,19.87
+2014,Febrero,Caldas,160.6,433.33,0.16
+2014,Julio,Valle del Cauca,23865.6,58874.98,23.87
+2014,Julio,Bogotá,2.22,4.1,0
+2014,Junio,Valle del Cauca,8.16,9.46,0.01
+2014,Junio,Caldas,208.8,715.85,0.21
+2014,Junio,Antioquia,24275,60809.4,24.27
+2014,Junio,Bogotá,3136,16383.94,3.14
+2014,Marzo,Caldas,180,840.42,0.18
+2014,Mayo,Valle del Cauca,46976.24,122063.22,46.98
+2014,Mayo,Cundinamarca,23625,53897.93,23.63
+2014,Noviembre,Valle del Cauca,22564.04,63623.75,22.56
+2014,Noviembre,Antioquia,861.5,3735.92,0.86
+2014,Noviembre,Cundinamarca,23625,60871.24,23.63
+2014,Octubre,Bogotá,22.05,6.89,0.02
+2014,Octubre,Valle del Cauca,23540.76,65561.18,23.54
+2014,Octubre,Bogotá,3920,21385.17,3.92
+2014,Septiembre,Valle del Cauca,23865.6,60995.62,23.87
+2014,Septiembre,Antioquia,21359,57270.02,21.36
+2015,Abril,Valle del Cauca,21696.4,73451.42,21.7
+2015,Abril,Bogotá,1961.28,10796.85,1.96
+2015,Abril,Antioquia,926.2,4231.14,0.93
+2015,Abril,Bogotá,2352,12833.82,2.35
+2015,Abril,Bogotá,1120,6186.64,1.12
+2015,Agosto,Valle del Cauca,18670.26,74879.04,18.67
+2015,Agosto,Caldas,0.6,2.96,0
+2015,Agosto,Caldas,508.2,2094.72,0.51
+2015,Agosto,Bogotá,4704,25045.36,4.7
+2015,Diciembre,Caldas,72.6,408.46,0.07
+2015,Diciembre,Valle del Cauca,21479.04,94567.59,21.48
+2015,Enero,Cundinamarca,3.1,5.03,0
+2015,Enero,Valle del Cauca,22347.48,72163.68,22.35
+2015,Enero,Caldas,292.48,1128.29,0.29
+2015,Febrero,Bogotá,83.49,54.85,0.08
+2015,Febrero,Valle del Cauca,22564.04,75163.71,22.56
+2015,Febrero,Cundinamarca,1568,9109.79,1.57
+2015,Febrero,Atlántico,122,285.69,0.12
+2015,Julio,Bogotá,4704,26784.65,4.7
+2015,Junio,Valle del Cauca,39921.84,138078.68,39.92
+2015,Junio,Bolívar,0.25,524.67,0
+2015,Junio,Caldas,435.6,1672.88,0.44
+2015,Junio,Bogotá,1875.75,7365.49,1.88
+2015,Marzo,Valle del Cauca,22239.2,80160.72,22.24
+2015,Marzo,Antioquia,18800.4,65176.45,18.8
+2015,Marzo,Bogotá,1958,9120.13,1.96
+2015,Marzo,Atlántico,4500,7865.52,4.5
+2015,Mayo,Bogotá,2352,12336.03,2.35
+2015,Mayo,Valle del Cauca,22.24,11.61,0.02
+2015,Noviembre,Valle del Cauca,47189.8,189916.64,47.19
+2015,Noviembre,Caldas,363.2,1511.79,0.36
+2015,Noviembre,Antioquia,22133,88607.73,22.13
+2015,Noviembre,Bogotá,399.5,2376.87,0.4
+2015,Noviembre,Bogotá,784,4345.96,0.78
+2015,Noviembre,Caldas,122.58,1189.02,0.12
+2015,Octubre,Valle del Cauca,47406.36,178458.65,47.41
+2015,Septiembre,Valle del Cauca,33303.56,127807.6,33.3
+2015,Septiembre,Antioquia,1,9.1,0
+2015,Septiembre,Bogotá,4704,26178.68,4.7
+2016,Abril,Bogotá,3632,17234.83,3.63
+2016,Abril,Caldas,145.2,760.6,0.15
+2016,Abril,Valle del Cauca,21154.2,83142.71,21.15
+2016,Abril,Bogotá,1920,9010.43,1.92
+2016,Abril,Bogotá,964.24,3560.6,0.96
+2016,Abril,Bogotá,2.92,55.59,0
+2016,Agosto,Valle del Cauca,3579.84,14730.5,3.58
+2016,Agosto,Antioquia,1085.79,5285.99,1.09
+2016,Agosto,Bogotá,3.8,41.8,0
+2016,Diciembre,Bogotá,0.96,124.32,0
+2016,Diciembre,Antioquia,8000,16070.46,8
+2016,Diciembre,Bogotá,1997.6,6829.05,2
+2016,Diciembre,Boyacá,3995.2,17470.67,4
+2016,Diciembre,Valle del Cauca,65170.47,259215.54,65.17
+2016,Diciembre,Bogotá,0.55,62.07,0
+2016,Enero,Valle del Cauca,23865.6,106009.33,23.87
+2016,Enero,Antioquia,85,6734.67,0.09
+2016,Enero,Bogotá,1452,7385.88,1.45
+2016,Febrero,Cundinamarca,125,676.44,0.13
+2016,Julio,Boyacá,3632,14262.9,3.63
+2016,Julio,Bogotá,120,323.69,0.12
+2016,Julio,Bogotá,2016,9226.41,2.02
+2016,Marzo,Valle del Cauca,41223.4,172458.85,41.22
+2016,Mayo,Valle del Cauca,15296.08,60970.66,15.3
+2016,Mayo,Bogotá,2016,10069.74,2.02
+2016,Mayo,Bogotá,10.02,99.47,0.01
+2016,Mayo,Norte de Santander,1200,3060.48,1.2
+2016,Noviembre,Bogotá,35,697.59,0.04
+2016,Noviembre,Bogotá,107,341.11,0.11
+2016,Noviembre,Bogotá,10,30.27,0.01
+2016,Noviembre,Valle del Cauca,24408.54,100239.18,24.41
+2016,Noviembre,Bogotá,2016,9885.27,2.02
+2016,Noviembre,Antioquia,238,1114.29,0.24
+2016,Octubre,Bogotá,3822.7,15771.21,3.82
+2016,Octubre,Boyacá,4994,21003.61,4.99
+2016,Octubre,Caldas,1606,9093.06,1.61
+2016,Octubre,Valle del Cauca,46321.36,180016.45,46.32
+2016,Octubre,Bogotá,2016,9318.9,2.02
+2016,Septiembre,Boyacá,5448,22835.05,5.45
+2016,Septiembre,Bogotá,2016,9325.25,2.02
+2017,Enero,Bogotá,3.05,194.91,0
+2017,Enero,Boyacá,3995.2,16623.41,4
+2017,Enero,Bogotá,2016,9267.19,2.02
+2017,Febrero,Boyacá,8989.2,36772.82,8.99
+2017,Febrero,Antioquia,0.5,74.21,0
+2017,Marzo,Bogotá,3.68,318.68,0
+2017,Marzo,Bogotá,148,474.91,0.15
+2017,Marzo,Bogotá,18.4,58.38,0.02
+2017,Marzo,Bogotá,1997.6,6460.71,2
+2017,Marzo,Valle del Cauca,47116.08,185802.02,47.12
+2017,Marzo,Bogotá,3360,17343.96,3.36
+2017,Marzo,Antioquia,2.74,648.55,0
+2017,Marzo,Antioquia,1.24,115.08,0
+2017,Abril,Bogotá,0.79,53.98,0
+2017,Mayo,Caldas,617.1,3330.6,0.62
+2017,Mayo,Bogotá,1.25,116.45,0
+2017,Abril,Boyacá,5992.8,24272.99,5.99
+2017,Mayo,Cundinamarca,50,230.82,0.05
+2017,Abril,Bogotá,66.4,218.07,0.07
+2017,Abril,Bogotá,871.68,2575.02,0.87
+2017,Junio,Valle del Cauca,18588.42,88589.14,18.59
+2017,Mayo,Antioquia,0.32,58.24,0
+2017,Julio,Bogotá,0.37,57.76,0
+2017,Mayo,Caldas,617.1,3330.6,0.62
+2017,Mayo,Bogotá,1.25,116.45,0
+2017,Mayo,Cundinamarca,50,230.82,0.05
+2017,Julio,Boyacá,6991.6,30643.52,6.99
+2017,Julio,Bogotá,2688,15085.25,2.69
+2017,Junio,Valle del Cauca,18588.42,88589.14,18.59
+2017,Julio,Sucre,24448.87,44627.79,24.45
+2017,Mayo,Antioquia,0.32,58.24,0

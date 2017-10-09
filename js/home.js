@@ -146,8 +146,8 @@ function highlightParents(d) {
     for(var i = limit.lowerLimit; i <= limit.upperLimit; i++){
       if(d.group > 0){
         //d3.select('#id-' + parseInt(d.i)).style('stroke', colour);
-        d3.select('#id-' + parseInt(d.i)).style('stroke', color).style('stroke-opacity', op).style('stroke-width', function (line) {
-          return parseInt(maxDepth + 1 - (d.d + sw)) + 'px';
+        d3.select('#id-' + parseInt(d.i)).transition().style('stroke', color).style('stroke-opacity', op).style('stroke-width', function (line) {
+          return parseInt((maxDepth + 1 - (d.d + sw))*2) + 'px';
         });
 
       }
@@ -159,20 +159,23 @@ function highlightParents(d) {
 function showProduct(d){
   switch(d.group){
     case 1:
-      location.href = 'map_cafe.html';
+      location.href = 'map.html?producto=cafe';
       break;
     case 2:
+      location.href = 'map.html?producto=cacao';
       break;
     case 3:
+      location.href = 'map.html?producto=algodon';
       break;
     case 4:
+      location.href = 'map.html?producto=yuca';
       break;
   }
 }
 
 function create() {
   d3.select('svg').selectAll('line').data(branches).enter().append('line').attr('x1', x1).attr('y1', y1).attr('x2', x2).attr('y2', y2).style('stroke-width', function (d) {
-    return parseInt(maxDepth + 1 - d.d) + 'px';
+    return parseInt((maxDepth + 1 - d.d)*2) + 'px';
   }).attr('id', function (d) {
     /*if(d.i < 341){
       console.log(branches[d.i]);

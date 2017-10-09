@@ -1,5 +1,38 @@
 $(function(){
 
+	var getUrlParameter = function getUrlParameter(sParam) {
+      var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+          sURLVariables = sPageURL.split('&'),
+          sParameterName,
+          i;
+
+      for (i = 0; i < sURLVariables.length; i++) {
+          sParameterName = sURLVariables[i].split('=');
+
+          if (sParameterName[0] === sParam) {
+              return sParameterName[1] === undefined ? true : sParameterName[1];
+          }
+      }
+	};
+
+	var validProducts = ["cacao", "cafe", "yuca", "algodon"];
+	var count = "unidades";
+	var ylabtext = "Cantidad exportada";
+	var abr = "KG"; 
+
+	var productName = getUrlParameter("producto");
+	if(productName == undefined || !validProducts.includes(productName)){
+	  productName = "cacao";
+	}
+
+	if(productName == "algodon"){
+		count = "valormilespesos";
+		ylabtext = "Ingresos";
+		abr = "COP";
+	}
+
+	$(".prod-name").text(productName[0].toUpperCase()+productName.substring(1));		
+
 	(function(){
 		var map_width = $("#map").parent().width(),
 			map_height = $("#map").parent().height(),
@@ -63,25 +96,32 @@ $(function(){
 				var nombres = data.map(function(d){ return d.key });			
 				var idx = nombres.indexOf(d.properties.NOMBRE_DPT);
 				if(idx == -1) return color.range()[0];
-		  		return color(data[idx].value.unidades);
+		  		return color(data[idx].value[count]);
 			}
 		}
 
 		function updateDeptInfo(d){
 			var dp = data.filter(function(g){ return g.key == d.properties.NOMBRE_DPT; });
-			$("#info-area").text(d.properties.AREA);
-			$("#info-toneladas").text(dp[0].value.toneladas);
-			$("#info-pesos").text(dp[0].value.valormilespesos);
-			updateChart(d.properties.NOMBRE_DPT);
+			if(dp[0] == undefined){
+				depName.text(d.properties.NOMBRE_DPT+" - no hay datos de exportación");
+				$("#bar_svg").addClass("invisible");
+	    		$("#local-table").addClass("invisible");
+			} else {
+				$("#info-area").text(d3.format(",.15d")(d.properties.AREA));
+				$("#info-toneladas").text(d3.format(",.4r")(dp[0].value.toneladas));
+				$("#info-pesos").text(d3.format(",.15d")(dp[0].value.valormilespesos*1000));
+				depName.text(d.properties.NOMBRE_DPT);
+				$("#bar_svg").removeClass("invisible");
+	    		$("#local-table").removeClass("invisible");
+				updateChart(d.properties.NOMBRE_DPT);
+			}
 		}
 
 		// When clicked, zoom in
-		function clicked(d) {
-			$("#local-table").removeClass("invisible");
+		function clicked(d) {			
 		  	var x, y, k;
 		  	if(d && d.properties){
 	    		updateDeptInfo(d);
-	    		depName.text(d.properties.NOMBRE_DPT);
 		  	}
 		    // Compute centroid of the selected path
 		    if (d && centered !== d) {
@@ -131,7 +171,7 @@ $(function(){
 		    			   .style("stroke","#000")
 		    			   .style('stroke-width', '0.7')
 		    			   .style('stroke-opacity', '0.5');
-		    			   		    			   
+
 		    mapLayer.selectAll('path')
 		    		.style('fill', function(d){return centered && d===centered ? '#00bfa5' : fillFn(d);});
 		}
@@ -178,7 +218,7 @@ $(function(){
 
 		var data;
 
-		d3.csv("data/local/exports/cacao.csv", function(error, csv_data){
+		d3.csv("data/local/exports/"+productName+".csv", function(error, csv_data){
 
 			console.log(csv_data);
 
@@ -220,7 +260,9 @@ $(function(){
 			  	var features = mapData.features;
 
 			    // Update color scale domain based on data
-			    color.domain(data.map(function(d){ return d.value.unidades; }));
+			    var dom = data.map(function(d){ return d.value[count]; });
+			    dom.push(0);
+			    color.domain(dom);
 
 			    // Draw each province as a path
 			    mapLayer.selectAll('path')
@@ -233,6 +275,24 @@ $(function(){
 					    .on('mouseout', mouseout)
 					    .on('click', clicked);
 
+				svg.append("g")
+  				   .attr("class", "legendQuant")
+  				   .attr("transform", "translate(20,20)");
+
+				var legend = d3.legendColor()
+							   .labelFormat(d3.format(".2f"))							   
+							   .title("")
+							   .titleWidth(100)
+							   .labelDelimiter("a")
+							   .labelFormat(",.15d")
+							   .labels(function(a){
+							   		return "De "+a.generatedLabels[a.i]+" "+abr;
+							   })
+							   .scale(color);
+
+				svg.select(".legendQuant")
+				   .call(legend);
+
 			});
 
 		});
@@ -244,7 +304,7 @@ $(function(){
 			      	  .attr("font-size", "12px")
 			      	  .attr("dy", "0.71em")
 			      	  .attr("fill", "#000")
-			      	  .text("Cantidad exportada, KG");
+			      	  .text(ylabtext+", "+abr);
 
 		var clickLabel = g.append("text")
 				      	  .attr("y", -100)
@@ -252,7 +312,7 @@ $(function(){
 				      	  .attr("font-size", "13px")
 				      	  .attr("dy", "0.71em")
 				      	  .attr("fill", "#000")
-				      	  .text("Clickea una barra para ver los datos de ese año");
+				      	  .text("Haz click una barra para ver los datos de ese año");
 
 		function updateChart(departamento){
 			console.log(departamento)
@@ -260,7 +320,7 @@ $(function(){
 			var data_dpto = data.filter(function(d){ return d.key == departamento })[0];
 
 			yLabel.transition()
-				  .attr("x", -150);
+				  .attr("x", -250);
 
 			clickLabel.transition()
 					  .attr("y", 0);
@@ -269,7 +329,7 @@ $(function(){
 
 			y.domain([
 						0,
-						d3.max(data_dpto.values, function(d){ return d.value.unidades; })*1.5
+						d3.max(data_dpto.values, function(d){ return d.value[count]; })*1.5
 					]);
 
 			xAxis.transition()
@@ -285,8 +345,8 @@ $(function(){
 
 			bars.transition()
 				.duration(tDuration)
-				.attr("height", function(d){ return height - y(d.value.unidades); })
-				.attr("y", function(d){ return y(d.value.unidades); });
+				.attr("height", function(d){ return height - y(d.value[count]); })
+				.attr("y", function(d){ return y(d.value[count]); });
 
 			bars.enter().append("rect")
 				.attr("class", "bar")
@@ -296,8 +356,8 @@ $(function(){
 				.on("click", function(d){ makeChartByMonth(d); })
 				.transition()
 				.duration(tDuration)
-				.attr("height", function(d){ return height - y(d.value.unidades); })
-				.attr("y", function(d){ return y(d.value.unidades) });
+				.attr("height", function(d){ return height - y(d.value[count]); })
+				.attr("y", function(d){ return y(d.value[count]) });
 				
 
 			bars.exit()
@@ -312,7 +372,7 @@ $(function(){
 		function makeChartByMonth(data_year){
 			
 			yLabel.transition()
-				  .attr("x", -150)
+				  .attr("x", -250)
 
 			clickLabel.transition()
 					  .attr("y", -100);
@@ -321,7 +381,7 @@ $(function(){
 
 			y.domain([
 						0,
-						d3.max(data_year.values, function(d){ return d.value.unidades; })*1.5
+						d3.max(data_year.values, function(d){ return d.value[count]; })*1.5
 					])
 
 			xAxis.transition()
@@ -349,8 +409,8 @@ $(function(){
 				.attr("width", x.bandwidth())
 				.transition()
 				.duration(tDuration)
-				.attr("height", function(d){ console.log("here"); return height - y(d.value.unidades); })
-				.attr("y", function(d){ console.log("here"); return y(d.value.unidades); });
+				.attr("height", function(d){ console.log("here"); return height - y(d.value[count]); })
+				.attr("y", function(d){ console.log("here"); return y(d.value[count]); });
 
 		}
 
